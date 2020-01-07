@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import GoogleMapReact from 'google-map-react';
+import { Jumbotron } from './Jumbotron';
+ 
+const AnyReactComponent = ({ text }) => <div>{text}</div>;
+ 
+class SimpleMap extends Component {
+  static defaultProps = {
+    center: {
+      lat: 48.8534,
+      lng: 2.3488
+    },
+    zoom: 11
+  };
+ 
+  render() {
+    return (
+      
+      // Important! Always set the container height explicitly
+      <div>
+       <Jumbotron/>
+      <div style={{ height: '50vh', width: '50%' }}>
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+        <GoogleMapReact
+          bootstrapURLKeys={{ key: "AIzaSyCXaK2q7JRoaK56cwB-_3TGsQwq0iyQ5-8"
+          }}
+          defaultCenter={this.props.center}
+          defaultZoom={this.props.zoom}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+          <AnyReactComponent
+            lat={ 48.8534}
+            lng={2.3488}
+            text="My Marker"
+          />
+        </GoogleMapReact>
+      </div>
+      </div>
+    );
+  }
 }
-
-export default App;
+ 
+export default SimpleMap;
